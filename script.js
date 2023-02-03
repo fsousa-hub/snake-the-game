@@ -12,7 +12,21 @@ let context = canvas.getContext("2d");
 let box = 32;
 
 /**
-* criar o backgroud, com a funcão criarBG
+ * Criar a cobrinha como lista, já que ela vai ser uma série de coordenadas.
+ * Que quando pintadas, criam os quadradinhos.
+ * */ 
+let snake = [];
+snake[0] = {
+    x: 8 * box,
+    y: 8 * box
+}
+let direction = "right";
+
+
+
+
+/**
+* Criar o backgroud, com a funcão criarBG
 * definir uma cor com fillStyle
 * desenhar retângulo  com fillRect setando x e y, e largura e a altura 
 */
@@ -21,4 +35,15 @@ function criarBG(){
     context.fillRect(0, 0, 16 * box, 16 * box);
 }
 
+/**
+ * Criar a cobrinha, com a função criarCobrinha
+ */
+function criarCobrinha(){
+    for (i = 0; i < snake.length; i++){
+        context.fillStyle = "green";
+        context.fillRect(snake[i].x, snake[i].y, box, box);
+    }
+}
+
 criarBG();
+criarCobrinha();
