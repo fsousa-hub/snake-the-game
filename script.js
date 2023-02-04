@@ -46,10 +46,34 @@ function criarCobrinha(){
 }
 
 /**
+ * Criar um evento de escuta (pegar evento de click), com addEventListener
+ * Detectar e chamar uma função
+ */
+document.addEventListener('keydown', update);
+
+/**
+ * Controle das direções, atraves da captura das teclas: 37, 38, 39 e 40
+ */
+function update(event) {
+    if (event.keyCode == 37 && direction != 'right') direction = 'left';
+    if (event.keyCode == 38 && direction != 'down') direction = 'up';
+    if (event.keyCode == 39 && direction != 'left') direction = 'right';
+    if (event.keyCode == 40 && direction != 'up') direction = 'down';
+
+}
+
+/**
  * Criar função que atualiza jogo
  */
 
 function iniciarJogo(){
+    
+    // impedir que a cobrinha se esconda (suma)
+    if(snake[0].x > 15*box && direction == "right") snake[0].x = 0;
+    if(snake[0].x < 0 && direction == "left") snake[0].x = 16 * box;
+    if(snake[0].y > 15*box && direction == "down") snake[0].y = 0;
+    if(snake[0].y > 0 && direction == "up") snake[0].y = 16 * box;
+    
     criarBG();
     criarCobrinha();
 
@@ -69,6 +93,7 @@ function iniciarJogo(){
         x: snakeX,
         y: snakeY
     }
+    // método unshitf, adiciona como primeiro quadradinho da cobrinha
     snake.unshift(newHead);
 
 }
