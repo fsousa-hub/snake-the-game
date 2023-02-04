@@ -45,5 +45,35 @@ function criarCobrinha(){
     }
 }
 
-criarBG();
-criarCobrinha();
+/**
+ * Criar função que atualiza jogo
+ */
+
+function iniciarJogo(){
+    criarBG();
+    criarCobrinha();
+
+    // variaveis array x e y
+    let snakeX = snake[0].x;
+    let snakeY = snake[0].y;
+
+    // direcoes
+    if (direction == "right") snakeX += box;
+    if (direction == "left") snakeX -= box;
+    if (direction == "up") snakeY -= box;
+    if (direction == "down") snakeY += box;
+
+    snake.pop();
+
+    let newHead = {
+        x: snakeX,
+        y: snakeY
+    }
+    snake.unshift(newHead);
+
+}
+
+/**
+ * Utilizar a função setInterval, para iniciar e atualizar o jogoa a ada 100 ms
+ */
+let jogo = setInterval(iniciarJogo, 100);
